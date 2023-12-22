@@ -1,6 +1,7 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards } from '@nestjs/common';
 import { CategoriesService } from './categories.service';
 import { Prisma } from '@prisma/client';
+import { AuthGuard } from 'src/auth/guards/auth.guard';
 
 @Controller('categories')
 export class CategoriesController {
@@ -12,6 +13,7 @@ export class CategoriesController {
   }
 
   @Get()
+  @UseGuards(AuthGuard)
   findAll() {
     return this.categoriesService.findAll();
   }
